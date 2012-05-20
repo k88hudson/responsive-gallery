@@ -12,6 +12,15 @@
 
 	<link rel="stylesheet" href="css/style.css">
 	<style>
+	body {background:#000; color:#FFF;}
+	#container {
+		opacity: 0;
+		-webkit-transition: all 1s ease;
+		-moz-transition: all 1s ease;
+		-ms-transition: all 1s ease;
+		-o-transition: all 1s ease;
+		transition: all 1s ease;
+	}
 	.isotope,
 	.isotope .isotope-item {
 	  /* change duration value to whatever you like */
@@ -40,12 +49,12 @@
 
 		.element {
 			height: 100px;
-			width: 103px;
+			width: 100px;
 			margin: 1px;
 		}
 		.element.big {
 			height: 300px;
-			width: 103px;
+			width: 200px;
 		}
 	</style>
 	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
@@ -60,10 +69,10 @@
 	<a href="#" id="random">( RANDOM )</a>
 	<div id="container">
 		<img data-sort="1" class="element" src="http://lorempixel.com/100/100/fashion">
-		<img data-sort="2" class="element" src="http://lorempixel.com/100/100/sports">
+		<img data-sort="2" class="element big" src="http://lorempixel.com/200/300/sports">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/1">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/2">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/3">
+		<img data-sort="3" class="element big" src="http://lorempixel.com/200/300/people/3">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/4">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/5">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/6">
@@ -86,7 +95,7 @@
       $container.imagesLoaded( function(){		
 	      $container.isotope({
 	        itemSelector: '.element'
-	      });
+	      }).css("opacity", 1);
 	  });
 
       	$("#newitems").click(function() { 
