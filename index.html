@@ -12,10 +12,35 @@
 
 	<link rel="stylesheet" href="css/style.css">
 	<style>
+	.isotope,
+	.isotope .isotope-item {
+	  /* change duration value to whatever you like */
+	  -webkit-transition-duration: 0.8s;
+	     -moz-transition-duration: 0.8s;
+	      -ms-transition-duration: 0.8s;
+	       -o-transition-duration: 0.8s;
+	          transition-duration: 0.8s;
+	}
+
+	.isotope {
+	  -webkit-transition-property: height, width;
+	     -moz-transition-property: height, width;
+	      -ms-transition-property: height, width;
+	       -o-transition-property: height, width;
+	          transition-property: height, width;
+	}
+
+	.isotope .isotope-item {
+	  -webkit-transition-property: -webkit-transform, opacity;
+	     -moz-transition-property:    -moz-transform, opacity;
+	      -ms-transition-property:     -ms-transform, opacity;
+	       -o-transition-property:         top, left, opacity;
+	          transition-property:         transform, opacity;
+	}
+
 		.element {
 			height: 100px;
 			width: 103px;
-			background: red;
 			margin: 1px;
 		}
 		.element.big {
@@ -30,13 +55,15 @@
 
 </header>
 <div role="main">
+	<h3>SHAKE ME</h3>
+	<a href="#" id="foo">( OR TAP ME )</a>
 	<div id="container">
-		<div class="element">Hello world</div>
-		<div class="element">Hello world</div>
-		<div class="element big">Hello world</div>
-		<div class="element">Hello world</div>
+		<img class="element" src="http://lorempixel.com/100/100/fashion">
+		<img class="element" src="http://lorempixel.com/100/100/sports">
+		<img class="element" src="http://lorempixel.com/100/100/people">
+		<img class="element" src="http://lorempixel.com/100/100/nature">
 	</div>
-	<a href="#" id="foo">clickme</a>
+	
 </div>
 <footer>
 
@@ -56,13 +83,13 @@
       });
 
       $("#foo").click(function() { 
-        	var $newItems = $('<div class="element">Bloop</div>');
-        	$('#container').isotope( 'insert', $newItems );
+        	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
+        	$('#container').prepend( $newItems).isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
     	});
 
        $(this).gShake(function() { 
-        	var $newItems = $('<div class="element">Bloop</div>');
-        	$('#container').isotope( 'insert', $newItems );
+        	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
+        	$('#container').prepend( $newItems).isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
     	});
       
     });
