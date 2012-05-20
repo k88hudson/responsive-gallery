@@ -15,6 +15,7 @@
 	body {background:#000; color:#FFF;}
 	#container {
 		opacity: 0;
+		width: 320px;
 	}
 
 	#container, .element, .big {
@@ -70,18 +71,19 @@
 	<h3>SHAKE ME</h3>
 	<a href="#" id="newitems">( NEW ITEMS )</a>
 	<a href="#" id="random">( RANDOM )</a>
-	<a href="#" id="src">( src )</a>
+	<a href="#" id="rubiksA">( A )</a>
+	<a href="#" id="rubiksB">( B )</a>
 	<a href="#" id="cloneNode">( cloneNode )</a>
 	<div id="container">
-		<img data-sort="1" class="element" src="http://lorempixel.com/100/100/fashion">
-		<img data-sort="2" class="element" src="http://lorempixel.com/100/100/sports">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/1">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/2">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/3">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/4">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/5">
-		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/6">
-		<img data-sort="4" class="element" src="http://lorempixel.com/100/100/nature">
+		<img data-sort="1" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
+		<img data-sort="2" class="element rubiksA" src="http://lorempixel.com/100/100/sports">
+		<img data-sort="3" class="element rubiksA" src="http://lorempixel.com/100/100/people/1">
+		<img data-sort="4" class="element" src="http://lorempixel.com/100/100/people/2">
+		<img data-sort="5" class="element" src="http://lorempixel.com/100/100/people/3">
+		<img data-sort="6" class="element" src="http://lorempixel.com/100/100/people/4">
+		<img data-sort="7" class="element" src="http://lorempixel.com/100/100/people/5">
+		<img data-sort="8" class="element" src="http://lorempixel.com/100/100/people/6">
+		<img data-sort="9" class="element" src="http://lorempixel.com/100/100/nature">
 	</div>
 	
 </div>
@@ -92,6 +94,7 @@
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 <script src="js/libs/jquery.isotope.min.js"></script>
 <script src="js/libs/gshake.js"></script>
+<script src="js/libs/jgestures.min.js"></script>
 <script>
     $(function(){
       
@@ -101,6 +104,11 @@
 
       $container.imagesLoaded( function(){		
 	      $container.isotope({
+      		getSortData : {
+				  number : function ( $elem ) {
+				    return parseInt( $elem.attr("data-sort") );
+				  }
+			},
 	        itemSelector: '.element'
 	      }).css("opacity", 1);
 	  });
@@ -111,14 +119,59 @@
         	$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
         	});
 
-      	$(".element").click(function() { 
+      	$("#element").click(function() { 
       		$(this).toggleClass("big");
       		$container.isotope("reLayout");
       	});
 
-      	$("#src").click( function(){ 
-      		snd.src = snd.src
-    		snd.play();
+      	$(".rubiksA").bind( "swiperight", function() {
+      		$a = $container.find("[data-sort='1']")
+      		$b = $container.find("[data-sort='2']")
+      		$c = $container.find("[data-sort='3']")
+      		console.log($a, $b, $c);
+      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
+      		$a.attr("data-sort", 2);
+      		$b.attr("data-sort", 3);
+      		$c.remove();
+      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
+      		
+  			$container.isotope("reloadItems").isotope({ 
+    			sortBy : "number" 
+			});
+      	});
+
+      	$("#rubiksA").click( function(){ 
+      		$a = $container.find("[data-sort='1']")
+      		$b = $container.find("[data-sort='4']")
+      		$c = $container.find("[data-sort='7']")
+      		console.log($a, $b, $c);
+      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
+      		$a.attr("data-sort", 4);
+      		$b.attr("data-sort", 7);
+      		$c.remove();
+      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
+      		
+  			$container.isotope("reloadItems").isotope({ 
+    			sortBy : "number" 
+			});
+      		
+      	});
+
+      	$("#rubiksB").click( function(){ 
+      		$a = $container.find("[data-sort='1']")
+      		$b = $container.find("[data-sort='2']")
+      		$c = $container.find("[data-sort='3']")
+      		console.log($a, $b, $c);
+      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
+      		$a.attr("data-sort", 2);
+      		$b.attr("data-sort", 3);
+      		$c.remove();
+      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
+      		
+  			$container.isotope("reloadItems").isotope({ 
+    			sortBy : "number" 
+			});
+      		
       	});
 
       	$("#cloneNode").click( function(){ 
