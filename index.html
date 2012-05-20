@@ -56,12 +56,13 @@
 </header>
 <div role="main">
 	<h3>SHAKE ME</h3>
-	<a href="#" id="foo">( OR TAP ME )</a>
+	<a href="#" id="newitems">( NEW ITEMS )</a>
+	<a href="#" id="random">( RANDOM )</a>
 	<div id="container">
-		<img class="element" src="http://lorempixel.com/100/100/fashion">
-		<img class="element" src="http://lorempixel.com/100/100/sports">
-		<img class="element" src="http://lorempixel.com/100/100/people">
-		<img class="element" src="http://lorempixel.com/100/100/nature">
+		<img data-sort="1" class="element" src="http://lorempixel.com/100/100/fashion">
+		<img data-sort="2" class="element" src="http://lorempixel.com/100/100/sports">
+		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people">
+		<img data-sort="4" class="element" src="http://lorempixel.com/100/100/nature">
 	</div>
 	
 </div>
@@ -77,23 +78,52 @@
     $(function(){
       
       var $container = $('#container');
-      $container.imagesLoaded( function(){
+      $container.imagesLoaded( function(){		
 	      $container.isotope({
 	        itemSelector: '.element'
 	      });
 	  });
 
-      $("#foo").click(function() { 
+      	$("#newitems").click(function() { 
         	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
-        	$('#container').prepend( $newItems);
-        	$container.imagesLoaded( function(){
-        		$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
+        	$container.prepend( $newItems);
+        	$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
         	});
+
+    	$("#random").click(function() { 
+    		$elems = $container.find(".element");
+
+    		$elems.each(function(i, item) {
+    			var randomnumber=Math.floor(Math.random()* ($elems.length + 1) );
+    			$(item).attr("data-sort", randomnumber);
+    		});
+
+    		$container.isotope("reloadItems").isotope({ 
+    			getSortData : {
+					  number : function ( $elem ) {
+					    return parseInt( $elem.attr("data-sort") );
+					  }
+				},
+    			sortBy : "number" 
+    		});
     	});
 
        $(this).gShake(function() { 
-        	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
-        	$('#container').prepend( $newItems).isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
+        	$elems = $container.find(".element");
+
+    		$elems.each(function(i, item) {
+    			var randomnumber=Math.floor(Math.random()* ($elems.length + 1) );
+    			$(item).attr("data-sort", randomnumber);
+    		});
+
+    		$container.isotope("reloadItems").isotope({ 
+    			getSortData : {
+					  number : function ( $elem ) {
+					    return parseInt( $elem.attr("data-sort") );
+					  }
+				},
+    			sortBy : "number" 
+    		});
     	});
       
     });
