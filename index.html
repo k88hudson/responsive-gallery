@@ -114,8 +114,8 @@
       	});
 
     	$("#random").click(function() { 
-    		var thisSnd = snd.cloneNode();
-    		thisSnd.play();
+    		snd.src = snd.src
+    		snd.play();
 
     		$elems = $container.find(".element");
 
