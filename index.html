@@ -115,7 +115,7 @@
 
     	$("#random").click(function() { 
     		var thisSnd = snd.cloneNode();
-    		snd.play();
+    		thisSnd.play();
 
     		$elems = $container.find(".element");
 
@@ -135,9 +135,8 @@
     	});
 
        $(this).gShake(function() { 
-       		var thisSnd = snd.cloneNode();
-    		snd.play();
-
+       		document.getElementById('random').click();
+       		/*
         	$elems = $container.find(".element");
 
     		$elems.each(function(i, item) {
@@ -153,6 +152,7 @@
 				},
     			sortBy : "number" 
     		});
+    		*/
     	});
       
     });
