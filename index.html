@@ -114,7 +114,7 @@
       	});
 
     	$("#random").click(function() { 
-    		snd.srd = snd.src;
+    		snd.src = snd.src;
     		snd.play();
 
     		$elems = $container.find(".element");
@@ -135,7 +135,7 @@
     	});
 
        $(this).gShake(function() { 
-       		var snd = new Audio("ding.mp3");
+       		snd.src = snd.src;
     		snd.play();
 
         	$elems = $container.find(".element");
