@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="css/style.css">
 	<style>
 	body {background:#000; color:#FFF;}
+	#A {
+		width: 300px;
+		height: 100px;
+		background: blue;
+	}
 	#container {
 		opacity: 0;
 		width: 320px;
@@ -69,12 +74,16 @@
 </header>
 <div role="main">
 	<h3>SHAKE ME</h3>
-	<p id="debug"></p>
+	<p id="debug">OK</p>
+
 	<a href="#" id="newitems">( NEW ITEMS )</a>
 	<a href="#" id="random">( RANDOM )</a>
 	<a href="#" id="rubiksA">( A )</a>
 	<a href="#" id="rubiksB">( B )</a>
 	<a href="#" id="cloneNode">( cloneNode )</a>
+
+	<div id="A"></div>
+
 	<div id="container">
 		<img id="swipe" data-sort="1" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
 		<img data-sort="2" class="element rubiksA" src="http://lorempixel.com/100/100/sports">
@@ -125,21 +134,8 @@
       		$container.isotope("reLayout");
       	});
 
-      	$("#container").bind( "swiperight", function() {
-      		$("#debug").html("swipe");
-      		$a = $container.find("[data-sort='1']")
-      		$b = $container.find("[data-sort='2']")
-      		$c = $container.find("[data-sort='3']")
-      		console.log($a, $b, $c);
-      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
-      		$a.attr("data-sort", 2);
-      		$b.attr("data-sort", 3);
-      		$c.remove();
-      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
-      		
-  			$container.isotope("reloadItems").isotope({ 
-    			sortBy : "number" 
-			});
+      	$("#A").bind( "swiperight", function() {
+      		$("#debug").fadeIn().fadeOut("slow");
       	});
 
       	$("#rubiksA").click( function(){ 
