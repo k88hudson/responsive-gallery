@@ -13,12 +13,6 @@
 	<link rel="stylesheet" href="css/style.css">
 	<style>
 	body {background:#000; color:#FFF;}
-	#A {
-		position: absolute;
-		width: 300px;
-		height: 100px;
-		background: blue;
-	}
 	#container {
 		opacity: 0;
 		width: 320px;
@@ -82,8 +76,6 @@
 	<a href="#" id="rubiksA">( A )</a>
 	<a href="#" id="rubiksB">( B )</a>
 	<a href="#" id="cloneNode">( cloneNode )</a>
-
-	<div id="A"></div>
 
 	<div id="container">
 		<img id="swipe" data-sort="1" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
@@ -193,52 +185,17 @@
       		
       	});
 
-      	$("#cloneNode").click( function(){ 
-      		var thisSound = snd.cloneNode(false);
-    		thisSound.play();
-      	});
 
     	$("#random").click(function() { 
     		snd.src = snd.src
     		snd.play();
 
-    		$elems = $container.find(".element");
-
-    		$elems.each(function(i, item) {
-    			var randomnumber=Math.floor(Math.random()* ($elems.length + 1) );
-    			$(item).attr("data-sort", randomnumber);
-    		});
-
-    		$container.isotope("reloadItems").isotope({ 
-    			getSortData : {
-					  number : function ( $elem ) {
-					    return parseInt( $elem.attr("data-sort") );
-					  }
-				},
-    			sortBy : "number" 
-    		});
+    		$container.isotope('shuffle');
     	});
 
        $(this).gShake(function() { 
-       	
-        	$elems = $container.find(".element");
-
-    		$elems.each(function(i, item) {
-    			var randomnumber=Math.floor(Math.random()* ($elems.length + 1) );
-    			$(item).attr("data-sort", randomnumber);
-    		});
-
-    		$container.isotope("reloadItems").isotope({ 
-    			getSortData : {
-					  number : function ( $elem ) {
-					    return parseInt( $elem.attr("data-sort") );
-					  }
-				},
-    			sortBy : "number" 
-    		});
-    	
+        	$container.isotope('shuffle');
     	});
-      
     });
 </script>
 <script src="js/script.js"></script>
