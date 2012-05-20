@@ -98,9 +98,9 @@
 <script src="js/libs/gshake.js"></script>
 <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 <script>
-    $(function(){
-      
-      var $container = $('#container');
+    document.addEventListener("DOMContentLoaded", function(){
+
+      var $container = $('#container')	
       var snd = new Audio("ding.mp3");
       snd.preload = true;
 
@@ -127,7 +127,6 @@
       	});
 
       	//$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
-
       	$("[data-row='0']").bind( "swiperight", shift({row:0}) );
       	$("[data-row='1']").bind( "swiperight", shift({row:1}) );
       	$("[data-row='2']").bind( "swiperight", shift({row:2}) );
@@ -146,6 +145,7 @@
       			col = args.col || 0;
 
       		fn = function() {
+      			console.log( "shift" );
       			var $items;
 	      		( args.row !== undefined ) && ( $items = $("[data-row='"+row+"']") );
 	      		( args.col !== undefined ) && ( $items = $("[data-col='"+col+"']") );
@@ -180,7 +180,7 @@
        $(this).gShake(function() { 
         	$container.isotope('shuffle');
     	});
-    });
+    }, false);
 </script>
 <script src="js/script.js"></script>
 </body>
