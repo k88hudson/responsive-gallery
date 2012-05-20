@@ -114,7 +114,7 @@
       	});
 
     	$("#random").click(function() { 
-    		snd.src = snd.src;
+    		var thisSnd = snd.cloneNode();
     		snd.play();
 
     		$elems = $container.find(".element");
@@ -135,7 +135,7 @@
     	});
 
        $(this).gShake(function() { 
-       		snd.src = snd.src;
+       		var thisSnd = snd.cloneNode();
     		snd.play();
 
         	$elems = $container.find(".element");
