@@ -77,14 +77,18 @@
     $(function(){
       
       var $container = $('#container');
-      
-      $container.isotope({
-        itemSelector: '.element'
-      });
+      $container.imagesLoaded( function(){
+	      $container.isotope({
+	        itemSelector: '.element'
+	      });
+	  });
 
       $("#foo").click(function() { 
         	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
-        	$('#container').prepend( $newItems).isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
+        	$('#container').prepend( $newItems);
+        	$container.imagesLoaded( function(){
+        		$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
+        	});
     	});
 
        $(this).gShake(function() { 
