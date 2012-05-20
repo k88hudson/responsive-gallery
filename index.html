@@ -14,6 +14,7 @@
 	<style>
 	body {background:#000; color:#FFF;}
 	#A {
+		position: absolute;
 		width: 300px;
 		height: 100px;
 		background: blue;
@@ -104,7 +105,7 @@
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 <script src="js/libs/jquery.isotope.min.js"></script>
 <script src="js/libs/gshake.js"></script>
-<script src="js/libs/jgestures.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 <script>
     $(function(){
       
@@ -134,9 +135,29 @@
       		$container.isotope("reLayout");
       	});
 
-      	$("#A").bind( "swiperight", function() {
-      		$("#debug").fadeIn().fadeOut("slow");
-      	});
+      	$(".rubiksA").bind( "swiperight", swipeRightFunction);
+
+      	function swipeRightFunction() {
+      		$(".rubiksA").unbind( "swiperight", swipeRightFunction);
+      		$("#debug").stop().fadeIn().fadeOut("slow");
+
+      		$a = $container.find("[data-sort='1']")
+      		$b = $container.find("[data-sort='2']")
+      		$c = $container.find("[data-sort='3']")
+
+      		$newItem = $('<img class="element rubiksA" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
+
+      		$a.attr("data-sort", 2);
+      		$b.attr("data-sort", 3);
+      		$c.remove();
+      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
+      		
+  			$container.isotope("reloadItems").isotope({ 
+    			sortBy : "number" 
+			});
+
+			$(".rubiksA").bind( "swiperight", swipeRightFunction);
+      	}
 
       	$("#rubiksA").click( function(){ 
       		$a = $container.find("[data-sort='1']")
