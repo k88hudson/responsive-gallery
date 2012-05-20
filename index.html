@@ -11,8 +11,12 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />	
 	<style>
 	body {background:#000; color:#FFF;}
+
+	a, a:visited { color: #FFF; }
+
 	#container {
 		opacity: 0;
 		width: 320px;
@@ -64,17 +68,15 @@
 	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
 <body>
-<header>
+<div data-role="header"> 
+	<p><span class="title">Shake me</span>
+	<a href="#" id="random" data-role="button">Random</a>
+	<a href="#" id="rubiksA" data-role="button">Try</a>
+	<a href="#" id="rubiksB" data-role="button">Try</a>
+	</p>	
+</div> 
 
-</header>
 <div role="main">
-	<h3>SHAKE ME</h3>
-	<a href="#" id="newitems">( NEW ITEMS )</a>
-	<a href="#" id="random">( RANDOM )</a>
-	<a href="#" id="rubiksA">( A )</a>
-	<a href="#" id="rubiksB">( B )</a>
-	<a href="#" id="cloneNode">( cloneNode )</a>
-
 	<div id="container">
 		<img data-row="0" data-col="0" id="swipe" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
 		<img data-row="0" data-col="1" class="element rubiksA" src="http://lorempixel.com/100/100/sports">
@@ -115,17 +117,7 @@
 	      }).css("opacity", 1);
 	  });
 
-      	$("#newitems").click(function() { 
-        	var $newItems = $('<img class="element" src="http://lorempixel.com/100/100/fashion"><img class="element" src="http://lorempixel.com/100/100/people"><img class="element" src="http://lorempixel.com/100/100/nature">');
-        	$container.prepend( $newItems);
-        	$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
-        	});
-
-      	$("#element").click(function() { 
-      		$(this).toggleClass("big");
-      		$container.isotope("reLayout");
-      	});
-
+  
       	//$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
       	$("[data-row='0']").bind( "swiperight", shift({row:0}) );
       	$("[data-row='1']").bind( "swiperight", shift({row:1}) );
