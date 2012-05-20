@@ -15,11 +15,14 @@
 	body {background:#000; color:#FFF;}
 	#container {
 		opacity: 0;
-		-webkit-transition: all 1s ease;
-		-moz-transition: all 1s ease;
-		-ms-transition: all 1s ease;
-		-o-transition: all 1s ease;
-		transition: all 1s ease;
+	}
+
+	#container, .element, .big {
+		-webkit-transition: all 0.8s ease;
+		-moz-transition: all 0.8s ease;
+		-ms-transition: all 0.8s ease;
+		-o-transition: all 0.8s ease;
+		transition: all 0.8s ease;
 	}
 	.isotope,
 	.isotope .isotope-item {
@@ -53,7 +56,7 @@
 			margin: 1px;
 		}
 		.element.big {
-			height: 300px;
+			height: 200px;
 			width: 200px;
 		}
 	</style>
@@ -69,10 +72,10 @@
 	<a href="#" id="random">( RANDOM )</a>
 	<div id="container">
 		<img data-sort="1" class="element" src="http://lorempixel.com/100/100/fashion">
-		<img data-sort="2" class="element big" src="http://lorempixel.com/200/300/sports">
+		<img data-sort="2" class="element" src="http://lorempixel.com/100/100/sports">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/1">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/2">
-		<img data-sort="3" class="element big" src="http://lorempixel.com/200/300/people/3">
+		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/3">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/4">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/5">
 		<img data-sort="3" class="element" src="http://lorempixel.com/100/100/people/6">
@@ -92,6 +95,7 @@
     $(function(){
       
       var $container = $('#container');
+
       $container.imagesLoaded( function(){		
 	      $container.isotope({
 	        itemSelector: '.element'
@@ -103,6 +107,11 @@
         	$container.prepend( $newItems);
         	$container.isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
         	});
+
+      	$(".element").click(function() { 
+      		$(this).toggleClass("big");
+      		$container.isotope("reLayout");
+      	});
 
     	$("#random").click(function() { 
     		$elems = $container.find(".element");
