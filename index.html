@@ -95,6 +95,7 @@
       
       var $container = $('#container');
       var snd = new Audio("ding.mp3");
+      snd.preload = true;
 
       $container.imagesLoaded( function(){		
 	      $container.isotope({
