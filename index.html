@@ -70,6 +70,8 @@
 	<h3>SHAKE ME</h3>
 	<a href="#" id="newitems">( NEW ITEMS )</a>
 	<a href="#" id="random">( RANDOM )</a>
+	<a href="#" id="src">( src )</a>
+	<a href="#" id="cloneNode">( cloneNode )</a>
 	<div id="container">
 		<img data-sort="1" class="element" src="http://lorempixel.com/100/100/fashion">
 		<img data-sort="2" class="element" src="http://lorempixel.com/100/100/sports">
@@ -112,6 +114,16 @@
       	$(".element").click(function() { 
       		$(this).toggleClass("big");
       		$container.isotope("reLayout");
+      	});
+
+      	$("#src").click( function(){ 
+      		snd.src = snd.src
+    		snd.play();
+      	});
+
+      	$("#cloneNode").click( function(){ 
+      		var thisSound = snd.cloneNode(false);
+    		thisSound.play();
       	});
 
     	$("#random").click(function() { 
