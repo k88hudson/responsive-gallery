@@ -100,22 +100,24 @@
 <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 <!--<script src="js/libs/jgestures.js"></script>-->
 <script>
+
     document.addEventListener("DOMContentLoaded", function(){
+    	$.mobile.loadPage.defaults.showLoadMsg = false;
 
-      var $container = $('#container')	
-      var snd = new Audio("ding.mp3");
-      snd.preload = true;
+      	var $container = $('#container')	
+      	var snd = new Audio("ding.mp3");
+      	snd.preload = true;
 
-      $container.imagesLoaded( function(){		
-	      $container.isotope({
-      		getSortData : {
-				  number : function ( $elem ) {
-				    return ( parseInt($elem.attr("data-row"))*3 + parseInt($elem.attr("data-col")) );
-				  }
-			},
-	        itemSelector: '.element'
-	      }).css("opacity", 1);
-	  });
+	    $container.imagesLoaded( function(){		
+		    $container.isotope({
+	      		getSortData : {
+					  number : function ( $elem ) {
+					    return ( parseInt($elem.attr("data-row"))*3 + parseInt($elem.attr("data-col")) );
+					  }
+				},
+		        itemSelector: '.element'
+		    }).css("opacity", 1);
+		});
 
   
       	//$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
