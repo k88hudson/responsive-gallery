@@ -69,7 +69,6 @@
 </header>
 <div role="main">
 	<h3>SHAKE ME</h3>
-	<p id="debug">OK</p>
 
 	<a href="#" id="newitems">( NEW ITEMS )</a>
 	<a href="#" id="random">( RANDOM )</a>
@@ -131,7 +130,6 @@
 
       	function swipeRightFunction() {
       		$(".rubiksA").unbind( "swiperight", swipeRightFunction);
-      		$("#debug").stop().fadeIn().fadeOut("slow");
 
       		$a = $container.find("[data-sort='1']")
       		$b = $container.find("[data-sort='2']")
