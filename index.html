@@ -77,15 +77,15 @@
 	<a href="#" id="cloneNode">( cloneNode )</a>
 
 	<div id="container">
-		<img id="swipe" data-sort="1" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
-		<img data-sort="2" class="element rubiksA" src="http://lorempixel.com/100/100/sports">
-		<img data-sort="3" class="element rubiksA" src="http://lorempixel.com/100/100/people/1">
-		<img data-sort="4" class="element" src="http://lorempixel.com/100/100/people/2">
-		<img data-sort="5" class="element" src="http://lorempixel.com/100/100/people/3">
-		<img data-sort="6" class="element" src="http://lorempixel.com/100/100/people/4">
-		<img data-sort="7" class="element" src="http://lorempixel.com/100/100/people/5">
-		<img data-sort="8" class="element" src="http://lorempixel.com/100/100/people/6">
-		<img data-sort="9" class="element" src="http://lorempixel.com/100/100/nature">
+		<img data-row="0" data-col="0" id="swipe" class="element rubiksA" src="http://lorempixel.com/100/100/fashion">
+		<img data-row="0" data-col="1" class="element rubiksA" src="http://lorempixel.com/100/100/sports">
+		<img data-row="0" data-col="2" class="element rubiksA" src="http://lorempixel.com/100/100/people/1">
+		<img data-row="1" data-col="0" class="element" src="http://lorempixel.com/100/100/people/2">
+		<img data-row="1" data-col="1" class="element" src="http://lorempixel.com/100/100/people/3">
+		<img data-row="1" data-col="2" class="element" src="http://lorempixel.com/100/100/people/4">
+		<img data-row="2" data-col="0" class="element" src="http://lorempixel.com/100/100/people/5">
+		<img data-row="2" data-col="1" class="element" src="http://lorempixel.com/100/100/people/6">
+		<img data-row="2" data-col="2" class="element" src="http://lorempixel.com/100/100/nature">
 	</div>
 	
 </div>
@@ -108,7 +108,7 @@
 	      $container.isotope({
       		getSortData : {
 				  number : function ( $elem ) {
-				    return parseInt( $elem.attr("data-sort") );
+				    return ( parseInt($elem.attr("data-row"))*3 + parseInt($elem.attr("data-col")) );
 				  }
 			},
 	        itemSelector: '.element'
@@ -126,63 +126,49 @@
       		$container.isotope("reLayout");
       	});
 
-      	$(".rubiksA").bind( "swiperight", swipeRightFunction);
+      	$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
 
-      	function swipeRightFunction() {
-      		$(".rubiksA").unbind( "swiperight", swipeRightFunction);
+      	$("[data-row='0']").bind( "swiperight", shift({row:0}) );
+      	$("[data-row='1']").bind( "swiperight", shift({row:1}) );
+      	$("[data-row='2']").bind( "swiperight", shift({row:1}) );
 
-      		$a = $container.find("[data-sort='1']")
-      		$b = $container.find("[data-sort='2']")
-      		$c = $container.find("[data-sort='3']")
+      	$("[data-col='0']").bind( "scrollstart", shift({col:0}) );
+      	$("[data-col='1']").bind( "scrollstart", shift({col:1}) );
+      	$("[data-col='2']").bind( "scrollstart", shift({col:1}) );
 
-      		$newItem = $('<img class="element rubiksA" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
 
-      		$a.attr("data-sort", 2);
-      		$b.attr("data-sort", 3);
-      		$c.remove();
-      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
-      		
-  			$container.isotope("reloadItems").isotope({ 
-    			sortBy : "number" 
-			});
+      	$("#rubiksA").click( shift({row:0}) );
+      	$("#rubiksB").click( shift({col:0}) );
 
-			$(".rubiksA").bind( "swiperight", swipeRightFunction);
+      	function shift( args ) {
+      		var fn,
+      			row = args.row || 0;
+      			col = args.col || 0;
+
+      		fn = function() {
+      			var $items;
+	      		( args.row !== undefined ) && ( $items = $("[data-row='"+row+"']") );
+	      		( args.col !== undefined ) && ( $items = $("[data-col='"+col+"']") );
+
+	      		$newItem = $('<img class="element" data-row="'+row+'" data-col="'+col+'" src="http://lorempixel.com/100/100/fashion">');
+	      		$items.each(function(i, item){
+	      			( args.row !==undefined ) && $(item).attr({
+	      				"data-col" : parseInt($(item).attr("data-col")) + 1,
+	      			});
+	      			( args.col !==undefined ) && $(item).attr({
+	      				"data-row" : parseInt($(item).attr("data-row")) + 1,
+	      			});
+	      		});
+	      		$($items[2]).remove();
+	      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
+	      		
+	  			$container.isotope("reloadItems").isotope({ 
+	    			sortBy : "number" 
+				});
+	      	}
+
+      		return fn;
       	}
-
-      	$("#rubiksA").click( function(){ 
-      		$a = $container.find("[data-sort='1']")
-      		$b = $container.find("[data-sort='4']")
-      		$c = $container.find("[data-sort='7']")
-      		console.log($a, $b, $c);
-      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
-      		$a.attr("data-sort", 4);
-      		$b.attr("data-sort", 7);
-      		$c.remove();
-      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
-      		
-  			$container.isotope("reloadItems").isotope({ 
-    			sortBy : "number" 
-			});
-      		
-      	});
-
-      	$("#rubiksB").click( function(){ 
-      		$a = $container.find("[data-sort='1']")
-      		$b = $container.find("[data-sort='2']")
-      		$c = $container.find("[data-sort='3']")
-      		console.log($a, $b, $c);
-      		$newItem = $('<img class="element" data-sort="1" src="http://lorempixel.com/100/100/fashion">');
-      		$a.attr("data-sort", 2);
-      		$b.attr("data-sort", 3);
-      		$c.remove();
-      		$container.prepend( $newItem) .isotope( 'reloadItems' ).isotope({ sortBy: 'number' });
-      		
-  			$container.isotope("reloadItems").isotope({ 
-    			sortBy : "number" 
-			});
-      		
-      	});
-
 
     	$("#random").click(function() { 
     		snd.src = snd.src
