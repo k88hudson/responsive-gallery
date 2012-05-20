@@ -126,16 +126,16 @@
       		$container.isotope("reLayout");
       	});
 
-      	$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
+      	//$(".element").bind('scrollstart', function(e){ e.preventDefault(); }, false); 
 
       	$("[data-row='0']").bind( "swiperight", shift({row:0}) );
       	$("[data-row='1']").bind( "swiperight", shift({row:1}) );
       	$("[data-row='2']").bind( "swiperight", shift({row:1}) );
-
+      	/*
       	$("[data-col='0']").bind( "scrollstart", shift({col:0}) );
       	$("[data-col='1']").bind( "scrollstart", shift({col:1}) );
       	$("[data-col='2']").bind( "scrollstart", shift({col:1}) );
-
+		*/
 
       	$("#rubiksA").click( shift({row:0}) );
       	$("#rubiksB").click( shift({col:0}) );
