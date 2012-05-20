@@ -84,7 +84,6 @@
 	
 </div>
 <footer>
-
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -95,6 +94,7 @@
     $(function(){
       
       var $container = $('#container');
+      var snd = new Audio("ding.mp3");
 
       $container.imagesLoaded( function(){		
 	      $container.isotope({
@@ -114,6 +114,9 @@
       	});
 
     	$("#random").click(function() { 
+    		var thisSnd = snd.cloneNode(false);
+    		thisSnd.play();
+
     		$elems = $container.find(".element");
 
     		$elems.each(function(i, item) {
@@ -132,6 +135,9 @@
     	});
 
        $(this).gShake(function() { 
+       		var snd = new Audio("ding.mp3");
+    		snd.play();
+
         	$elems = $container.find(".element");
 
     		$elems.each(function(i, item) {
